@@ -1,2 +1,121 @@
-# f5-xc-smsv2-azure
-Deployment of F5 XC SMSv2 in Azure
+# Description
+This Terraform code F5 Distributed Cloud (XC) CE clusters in Azure.
+
+# Assumptions
+## Existing VNET and subents
+The project requires an existing VNET and subnets; SLO(Outside) and SLI (Inside)
+## Intra node connectvity
+The traffic is allowed between CE nodes
+## Egress connectvity for Data and Management Planes
+All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/network-cloud-ref
+
+# Objects deployed
+* F5 XC SMSv2 objects
+* F5 XC JWT tokens
+* Virtual Site
+* Azure VM nodes
+* Azure NLB
+
+# High-Level steps
+``` mermaid
+flowchart TD
+    SMSv2["SMSv2"] --> JWT["JWT"]
+    JWT --> VirtualSite["VirtualSite"]
+    VirtualSite --> AzureNodes["Azure Nodes"]
+    AzureNodes --> NLB["NLB"]
+
+```
+
+# Usage
+## F5 XC authentication
+Generate and download API certificate for Service Credential account. Make sure the service credential has a correct write permissions to System namespace. Save the file as 'p12.p12' for pipeline compatibility and note the password.
+
+### Export .p12 password in your ADO
+```
+export VES_P12_PASSWORD=<your_password>
+````
+
+## terraform.tfvars
+Fill terraform.tfvars with the required variables. 
+```
+vim terraform.tfvars
+```
+
+## Execute Terraform
+```
+terraform init
+```
+
+```
+terraform plan
+```
+
+```
+terraform apply
+```
+
+# Diagram
+``` mermaid
+flowchart TD
+  subgraph "Virtual Site"
+    node1["node-1"]
+    node2["node-2"]
+    node3["node-3"]
+  end
+
+  cloud["F5 XC"]
+
+  %% Two tunnels per node
+  cloud ---|IPsec| node1
+  cloud ---|IPsec| node1
+
+  cloud ---|IPsec| node2
+  cloud ---|IPsec| node2
+
+  cloud ---|IPsec| node3
+  cloud ---|IPsec| node3
+
+```
+## RE + CE (External clients)
+
+```mermaid
+flowchart TD
+  client["External client"]
+  cloud["F5 XC"]
+
+  subgraph "Virtual Site"
+    node1["node-1"]
+    node2["node-2"]
+    node3["node-3"]
+  end
+
+  %% External client to F5 XC
+  client --> cloud
+
+  %% Two IPsec tunnels per node
+  cloud ---|IPsec| node1
+  cloud ---|IPsec| node1
+
+  cloud ---|IPsec| node2
+  cloud ---|IPsec| node2
+
+  cloud ---|IPsec| node3
+  cloud ---|IPsec| node3
+```
+
+## CE-only (Internal clients)
+``` mermaid
+flowchart TD
+client["Internal client"]
+  subgraph "Virtual Site"
+    node1["node-1"]
+    node2["node-2"]
+    node3["node-3"]
+  end
+
+  cloud["NLB"]
+  client --> cloud
+  cloud ---|HealthCheck| node1
+  cloud ---|HealthCheck| node2
+  cloud ---|HealthCheck| node3
+```
