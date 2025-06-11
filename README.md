@@ -5,10 +5,10 @@ This Terraform code F5 Distributed Cloud (XC) CE clusters in Azure.
 ## Existing VNET and subents
 The project requires an existing VNET and subnets; SLO (Outside) and SLI (Inside)
 
-## Intra node connectvity
+## Intra node connectivity
 The traffic is allowed between CE nodes
 
-## Egress connectvity for Data and Management Planes
+## Egress connectivity for Data and Management Planes
 All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/network-cloud-ref
 
 # Objects deployed
@@ -123,7 +123,7 @@ client["Internal client"]
     node3["node-3"]
   end
 
-  cloud["NLB"]
+  cloud["AzureNLB"]
   client --> cloud
   cloud ---|HealthCheck| node1
   cloud ---|HealthCheck| node2
