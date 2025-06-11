@@ -24,7 +24,7 @@ flowchart TD
     SMSv2["SMSv2"] --> JWT["JWT"]
     JWT --> VirtualSite["VirtualSite"]
     VirtualSite --> AzureNodes["Azure Nodes"]
-    AzureNodes --> NLB["NLB"]
+    AzureNodes --> AzureNLB["AzureNLB"]
 
 ```
 
