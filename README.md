@@ -3,9 +3,11 @@ This Terraform code F5 Distributed Cloud (XC) CE clusters in Azure.
 
 # Assumptions
 ## Existing VNET and subents
-The project requires an existing VNET and subnets; SLO(Outside) and SLI (Inside)
+The project requires an existing VNET and subnets; SLO (Outside) and SLI (Inside)
+
 ## Intra node connectvity
 The traffic is allowed between CE nodes
+
 ## Egress connectvity for Data and Management Planes
 All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/network-cloud-ref
 
@@ -28,12 +30,16 @@ flowchart TD
 
 # Usage
 ## F5 XC authentication
-Generate and download API certificate for Service Credential account. Make sure the service credential has a correct write permissions to System namespace. Save the file as 'p12.p12' for pipeline compatibility and note the password.
+Generate and download API certificate for Service Credential account. Make sure the service credential has a correct write permissions to System namespace.
 
 ### Export .p12 password in your ADO
 ```
 export VES_P12_PASSWORD=<your_password>
 ````
+### Download and place the p12 into global directory 
+```
+cp xxx.p12 global/p12.p12
+```
 
 ## terraform.tfvars
 Fill terraform.tfvars with the required variables. 
@@ -41,7 +47,11 @@ Fill terraform.tfvars with the required variables.
 vim terraform.tfvars
 ```
 
-## Execute Terraform
+## Execute Terraform from required environment
+```
+cd environment/prod
+```
+
 ```
 terraform init
 ```
