@@ -91,7 +91,7 @@ flowchart TD
 ```mermaid
 flowchart TD
   client["External client"]
-  cloud["F5 XC"]
+  cloud["F5 XC REs"]
 
   subgraph "Virtual Site"
     node1["node-1"]
