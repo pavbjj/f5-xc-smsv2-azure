@@ -73,7 +73,7 @@ flowchart TD
     node3["node-3"]
   end
 
-  cloud["F5 XC"]
+  cloud["F5 XC REs"]
 
   %% Two tunnels per node
   cloud ---|IPsec| node1
