@@ -41,7 +41,8 @@ All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/
 | Azure VM nodes        |Azure Instances             |
 | Azure NLB             |Azure Network Load Balancer |
 
-# High-Level steps
+# High-Level
+## Creation Order
 ``` mermaid
 flowchart TD
     SMSv2["SMSv2"] --> JWT["JWT"]
@@ -52,7 +53,7 @@ flowchart TD
 ```
 
 # Usage
-## F5 XC authentication
+## F5 XC Authentication
 Generate and download API certificate for Service Credential account. Make sure the service credential has a correct write permissions to System namespace.
 
 ### Export .p12 password in your ADO
