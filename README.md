@@ -120,7 +120,8 @@ flowchart TD
 ## CE-only (Internal clients)
 ``` mermaid
 flowchart TD
-client["Internal client"]
+  client["Internal client"]
+
   subgraph "Virtual Site"
     node1["node-1"]
     node2["node-2"]
@@ -128,8 +129,14 @@ client["Internal client"]
   end
 
   cloud["AzureNLB"]
+  app["Application"]
+
   client --> cloud
   cloud ---|HealthCheck| node1
   cloud ---|HealthCheck| node2
   cloud ---|HealthCheck| node3
+
+  node1 --> app
+  node2 --> app
+  node3 --> app
 ```
