@@ -42,7 +42,7 @@ All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/
 | Azure NLB             |Azure Network Load Balancer |
 
 # High-Level
-## Creation Order
+## Creation order
 ``` mermaid
 flowchart TD
     SMSv2["SMSv2"] --> JWT["JWT"]
