@@ -96,7 +96,7 @@ terraform apply
 flowchart TD
   client["External client"]
   cloud["F5 XC REs"]
-
+  app["Application"]
   subgraph "Virtual Site"
     node1["node-1"]
     node2["node-2"]
@@ -115,6 +115,9 @@ flowchart TD
 
   cloud ---|IPsec| node3
   cloud ---|IPsec| node3
+  node1 --> app
+  node2 --> app
+  node3 --> app
 ```
 
 ## CE-only (Internal clients)
