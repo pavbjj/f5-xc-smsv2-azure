@@ -33,11 +33,13 @@ The traffic is allowed between CE nodes
 All traffic is allowed to F5 XC cloud: https://docs.cloud.f5.com/docs/reference/network-cloud-ref
 
 # Objects deployed
-* F5 XC SMSv2 objects
-* F5 XC JWT tokens
-* Virtual Site
-* Azure VM nodes
-* Azure NLB
+| Component             | Description                |
+|-----------------------|----------------------------|
+| F5 XC SMSv2 objects   |CE cluster objects          |
+| F5 XC JWT tokens      |JWT tokens used for registration|
+| Virtual Site          |XC clustering               |
+| Azure VM nodes        |Azure Instances             |
+| Azure NLB             |Azure Network Load Balancer |
 
 # High-Level steps
 ``` mermaid
