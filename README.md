@@ -1,5 +1,5 @@
 # Description
-This Terraform code F5 Distributed Cloud (XC) deploys three single-node CE clusters in Azure.
+This Terraform code builds F5 Distributed Cloud (XC) and deploys three single-node CE clusters in Azure.
 ``` mermaid
 flowchart TD
   subgraph "Virtual Site"
